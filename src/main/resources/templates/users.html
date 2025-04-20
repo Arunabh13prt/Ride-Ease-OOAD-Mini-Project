@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideEase - Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .main-header {
+            background-color: #3498db;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center">RideEase Users</h1>
+            <p class="text-center">Registered Users in the System</p>
+            <div class="text-center mt-3">
+                <a href="/" class="btn btn-light">Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard-card">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${users.empty}">
+                            <td colspan="5" class="text-center">No users registered yet</td>
+                        </tr>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}">1</td>
+                            <td th:text="${user.name}">John Doe</td>
+                            <td th:text="${user.email}">john@example.com</td>
+                            <td th:text="${user.phoneNumber}">+1234567890</td>
+                            <td th:text="${#temporals.format(user.createdAt, 'dd-MM-yyyy HH:mm')}">01-01-2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>RideEase &copy; 2025 - A Ride Booking System</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -27,6 +27,7 @@ com/rideease/exception/UserNotFoundException.class
 com/rideease/repository/UserRepository.class
 com/rideease/controller/RideController.class
 com/rideease/model/Payment.class
+com/rideease/controller/web/HomeController.class
 com/rideease/util/DistanceCalculator.class
 com/rideease/repository/DriverRepository.class
 com/rideease/exception/PaymentFailedException.class

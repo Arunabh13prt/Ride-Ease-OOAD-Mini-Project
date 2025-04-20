@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideEase - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .dashboard-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .dashboard-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        .dashboard-icon {
+            font-size: 2.5rem;
+            color: #6c757d;
+        }
+        .main-header {
+            background-color: #3498db;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center">RideEase Dashboard</h1>
+            <p class="text-center">A Ride Booking System</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>Users</h3>
+                            <div class="dashboard-number" th:text="${userCount}">0</div>
+                            <p>Registered Users</p>
+                        </div>
+                        <div class="dashboard-icon">👥</div>
+                    </div>
+                    <a href="/users" class="btn btn-primary w-100">View All Users</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>Drivers</h3>
+                            <div class="dashboard-number" th:text="${driverCount}">0</div>
+                            <p>Active Drivers</p>
+                        </div>
+                        <div class="dashboard-icon">🚗</div>
+                    </div>
+                    <a href="/drivers" class="btn btn-primary w-100">View All Drivers</a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>Rides</h3>
+                            <div class="dashboard-number" th:text="${rideCount}">0</div>
+                            <p>Total Rides</p>
+                        </div>
+                        <div class="dashboard-icon">🚕</div>
+                    </div>
+                    <a href="/rides" class="btn btn-primary w-100">View All Rides</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="dashboard-card">
+                    <h3>About RideEase</h3>
+                    <p>RideEase is a ride booking system developed as part of a student project. It demonstrates the implementation of:</p>
+                    <ul>
+                        <li>MVC Architecture with Spring Boot</li>
+                        <li>Multiple Design Patterns including Factory, Builder, Singleton, and Command</li>
+                        <li>Database Integration with JPA and Hibernate</li>
+                        <li>Command Line Interface & Web Interface</li>
+                    </ul>
+                    <p class="text-muted mt-3">This project was developed by a team of 4 students.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>RideEase &copy; 2025 - A Ride Booking System</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

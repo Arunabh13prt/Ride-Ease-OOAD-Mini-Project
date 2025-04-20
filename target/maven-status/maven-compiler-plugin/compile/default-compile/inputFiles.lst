@@ -13,6 +13,7 @@
 /home/runner/workspace/src/main/java/com/rideease/service/impl/RatingServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/factory/VehicleFactory.java
 /home/runner/workspace/src/main/java/com/rideease/controller/PaymentController.java
+/home/runner/workspace/src/main/java/com/rideease/controller/web/HomeController.java
 /home/runner/workspace/src/main/java/com/rideease/controller/RideController.java
 /home/runner/workspace/src/main/java/com/rideease/repository/DriverRepository.java
 /home/runner/workspace/src/main/java/com/rideease/exception/UserNotFoundException.java

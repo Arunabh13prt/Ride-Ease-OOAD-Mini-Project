@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideEase - Rides</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .main-header {
+            background-color: #3498db;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .badge-requested {
+            background-color: #6c757d;
+            color: white;
+        }
+        .badge-accepted {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .badge-in-progress {
+            background-color: #ffc107;
+            color: black;
+        }
+        .badge-completed {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-cancelled {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center">RideEase Rides</h1>
+            <p class="text-center">All Rides in the System</p>
+            <div class="text-center mt-3">
+                <a href="/" class="btn btn-light">Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard-card">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Driver</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Pickup Time</th>
+                            <th>Fare</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${rides.empty}">
+                            <td colspan="8" class="text-center">No rides recorded yet</td>
+                        </tr>
+                        <tr th:each="ride : ${rides}">
+                            <td th:text="${ride.id}">1</td>
+                            <td th:text="${ride.user != null ? ride.user.name : 'Unknown'}">John Doe</td>
+                            <td th:text="${ride.driver != null ? ride.driver.name : 'Not Assigned'}">Jane Driver</td>
+                            <td th:text="${ride.pickupLocation != null ? ride.pickupLocation.address : 'Unknown'}">123 Main St</td>
+                            <td th:text="${ride.destinationLocation != null ? ride.destinationLocation.address : 'Unknown'}">456 Oak Ave</td>
+                            <td th:text="${ride.pickupTime != null ? #temporals.format(ride.pickupTime, 'dd-MM-yyyy HH:mm') : 'Not Set'}">01-01-2025 12:00</td>
+                            <td th:text="${'₹' + ride.fare}">₹150.00</td>
+                            <td>
+                                <span th:if="${ride.status.name() == 'REQUESTED'}" class="badge badge-requested">Requested</span>
+                                <span th:if="${ride.status.name() == 'ACCEPTED'}" class="badge badge-accepted">Accepted</span>
+                                <span th:if="${ride.status.name() == 'IN_PROGRESS'}" class="badge badge-in-progress">In Progress</span>
+                                <span th:if="${ride.status.name() == 'COMPLETED'}" class="badge badge-completed">Completed</span>
+                                <span th:if="${ride.status.name() == 'CANCELLED'}" class="badge badge-cancelled">Cancelled</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>RideEase &copy; 2025 - A Ride Booking System</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

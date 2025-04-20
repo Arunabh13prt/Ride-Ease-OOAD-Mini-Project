@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideEase - Drivers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .main-header {
+            background-color: #3498db;
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .badge-available {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-unavailable {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1 class="text-center">RideEase Drivers</h1>
+            <p class="text-center">Registered Drivers in the System</p>
+            <div class="text-center mt-3">
+                <a href="/" class="btn btn-light">Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard-card">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>License Number</th>
+                            <th>Status</th>
+                            <th>Vehicle Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${drivers.empty}">
+                            <td colspan="6" class="text-center">No drivers registered yet</td>
+                        </tr>
+                        <tr th:each="driver : ${drivers}">
+                            <td th:text="${driver.id}">1</td>
+                            <td th:text="${driver.name}">John Driver</td>
+                            <td th:text="${driver.phoneNumber}">+1234567890</td>
+                            <td th:text="${driver.licenseNumber}">DL1234567</td>
+                            <td>
+                                <span th:if="${driver.available}" class="badge badge-available">Available</span>
+                                <span th:unless="${driver.available}" class="badge badge-unavailable">Unavailable</span>
+                            </td>
+                            <td>
+                                <span th:if="${driver.vehicle != null}" 
+                                      th:text="${driver.vehicle.type + ' - ' + driver.vehicle.model + ' (' + driver.vehicle.registrationNumber + ')'}">
+                                    SEDAN - Toyota Camry (KA01AB1234)
+                                </span>
+                                <span th:unless="${driver.vehicle != null}">No vehicle assigned</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>RideEase &copy; 2025 - A Ride Booking System</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
