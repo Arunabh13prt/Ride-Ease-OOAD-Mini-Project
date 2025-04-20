@@ -18,6 +18,7 @@ com/rideease/service/PaymentService.class
 com/rideease/model/Rating.class
 com/rideease/service/impl/DriverServiceImpl.class
 com/rideease/model/Rating$RatingBuilder.class
+com/rideease/controller/web/RideWebController.class
 com/rideease/controller/RatingController.class
 com/rideease/service/UserService.class
 com/rideease/patterns/command/BookRideCommand.class
@@ -33,6 +34,7 @@ com/rideease/repository/DriverRepository.class
 com/rideease/exception/PaymentFailedException.class
 com/rideease/RideEaseApplication.class
 com/rideease/patterns/factory/VehicleFactory$1.class
+com/rideease/controller/web/UserWebController.class
 com/rideease/service/impl/PaymentServiceImpl.class
 com/rideease/patterns/factory/VehicleFactory.class
 com/rideease/model/Location$LocationBuilder.class
