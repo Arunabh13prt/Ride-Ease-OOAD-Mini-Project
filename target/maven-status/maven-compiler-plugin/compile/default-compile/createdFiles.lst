@@ -37,6 +37,7 @@ com/rideease/patterns/factory/VehicleFactory$1.class
 com/rideease/controller/web/UserWebController.class
 com/rideease/service/impl/PaymentServiceImpl.class
 com/rideease/patterns/factory/VehicleFactory.class
+com/rideease/controller/VehicleController.class
 com/rideease/model/Location$LocationBuilder.class
 com/rideease/service/impl/RideServiceImpl.class
 com/rideease/service/RatingService.class
@@ -54,6 +55,7 @@ com/rideease/patterns/command/CommandInvoker.class
 com/rideease/service/VehicleService.class
 com/rideease/service/RideService.class
 com/rideease/model/User$UserBuilder.class
+com/rideease/controller/web/DriverWebController.class
 com/rideease/model/Ride.class
 com/rideease/model/Driver$DriverBuilder.class
 com/rideease/patterns/builder/RideBuilder.class

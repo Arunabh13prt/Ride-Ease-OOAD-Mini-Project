@@ -25,10 +25,14 @@
         .badge-available {
             background-color: #28a745;
             color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
         }
         .badge-unavailable {
             background-color: #dc3545;
             color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -36,12 +40,25 @@
     <header class="main-header">
         <div class="container">
             <h1 class="text-center">RideEase Drivers</h1>
-            <p class="text-center">Registered Drivers in the System</p>
+            <p class="text-center">Manage System Drivers</p>
             <div class="text-center mt-3">
                 <a href="/" class="btn btn-light">Back to Dashboard</a>
+                <a href="/web/drivers/register" class="btn btn-success">Register New Driver</a>
             </div>
         </div>
     </header>
+    
+    <!-- Success or Error Messages -->
+    <div class="container">
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${successMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${errorMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
     
     <div class="container">
         <div class="dashboard-card">
@@ -51,31 +68,32 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>License</th>
                             <th>Phone</th>
-                            <th>License Number</th>
+                            <th>Rating</th>
                             <th>Status</th>
-                            <th>Vehicle Details</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${drivers.empty}">
-                            <td colspan="6" class="text-center">No drivers registered yet</td>
+                            <td colspan="7" class="text-center">No drivers registered yet</td>
                         </tr>
                         <tr th:each="driver : ${drivers}">
                             <td th:text="${driver.id}">1</td>
-                            <td th:text="${driver.name}">John Driver</td>
-                            <td th:text="${driver.phoneNumber}">+1234567890</td>
+                            <td th:text="${driver.name}">Jane Driver</td>
                             <td th:text="${driver.licenseNumber}">DL1234567</td>
+                            <td th:text="${driver.phoneNumber}">+123456789</td>
+                            <td th:text="${driver.averageRating}">4.8</td>
                             <td>
                                 <span th:if="${driver.available}" class="badge badge-available">Available</span>
                                 <span th:unless="${driver.available}" class="badge badge-unavailable">Unavailable</span>
                             </td>
                             <td>
-                                <span th:if="${driver.vehicle != null}" 
-                                      th:text="${driver.vehicle.type + ' - ' + driver.vehicle.model + ' (' + driver.vehicle.registrationNumber + ')'}">
-                                    SEDAN - Toyota Camry (KA01AB1234)
-                                </span>
-                                <span th:unless="${driver.vehicle != null}">No vehicle assigned</span>
+                                <a th:href="@{'/web/drivers/' + ${driver.id}}" class="btn btn-sm btn-info">View</a>
+                                <a th:href="@{'/web/drivers/' + ${driver.id} + '/edit'}" class="btn btn-sm btn-warning">Edit</a>
+                                <a th:if="${driver.available}" th:href="@{'/web/drivers/' + ${driver.id} + '/toggle-availability'}" class="btn btn-sm btn-danger">Set Unavailable</a>
+                                <a th:unless="${driver.available}" th:href="@{'/web/drivers/' + ${driver.id} + '/toggle-availability'}" class="btn btn-sm btn-success">Set Available</a>
                             </td>
                         </tr>
                     </tbody>
