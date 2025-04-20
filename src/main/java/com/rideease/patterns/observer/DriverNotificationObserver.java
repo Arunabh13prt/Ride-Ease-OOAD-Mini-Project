@@ -26,7 +26,7 @@ public class DriverNotificationObserver implements RideObserver {
         switch (status) {
             case DRIVER_ASSIGNED:
                 return "You have been assigned a new ride. User: " + ride.getUser().getName() + 
-                       ", Pickup: " + ride.getPickupAddress();
+                       ", Pickup: " + ride.getPickupLocation().getAddress();
             case IN_PROGRESS:
                 return "Your ride with " + ride.getUser().getName() + " is now in progress.";
             case COMPLETED:

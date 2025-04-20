@@ -1,10 +1,12 @@
 /home/runner/workspace/src/main/java/com/rideease/model/Driver.java
 /home/runner/workspace/src/main/java/com/rideease/controller/web/DriverWebController.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/DriverNotificationObserver.java
 /home/runner/workspace/src/main/java/com/rideease/model/Payment.java
 /home/runner/workspace/src/main/java/com/rideease/repository/UserRepository.java
 /home/runner/workspace/src/main/java/com/rideease/util/DistanceCalculator.java
 /home/runner/workspace/src/main/java/com/rideease/service/DriverService.java
 /home/runner/workspace/src/main/java/com/rideease/model/Vehicle.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/RideObserver.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/command/Command.java
 /home/runner/workspace/src/main/java/com/rideease/service/RatingService.java
 /home/runner/workspace/src/main/java/com/rideease/controller/RatingController.java
@@ -22,6 +24,7 @@
 /home/runner/workspace/src/main/java/com/rideease/controller/web/UserWebController.java
 /home/runner/workspace/src/main/java/com/rideease/exception/UserNotFoundException.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/command/CommandInvoker.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/AdminLogObserver.java
 /home/runner/workspace/src/main/java/com/rideease/model/User.java
 /home/runner/workspace/src/main/java/com/rideease/controller/UserController.java
 /home/runner/workspace/src/main/java/com/rideease/model/Location.java
@@ -48,7 +51,10 @@
 /home/runner/workspace/src/main/java/com/rideease/controller/web/RideWebController.java
 /home/runner/workspace/src/main/java/com/rideease/service/impl/UserServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/service/impl/PaymentServiceImpl.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/RideSubject.java
 /home/runner/workspace/src/main/java/com/rideease/service/UserService.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/RideNotificationManager.java
+/home/runner/workspace/src/main/java/com/rideease/patterns/observer/UserNotificationObserver.java
 /home/runner/workspace/src/main/java/com/rideease/model/enums/PaymentMethod.java
 /home/runner/workspace/src/main/java/com/rideease/model/enums/VehicleType.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/command/CancelRideCommand.java

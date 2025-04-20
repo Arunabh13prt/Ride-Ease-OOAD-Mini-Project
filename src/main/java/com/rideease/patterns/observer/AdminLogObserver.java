@@ -25,8 +25,8 @@ public class AdminLogObserver implements RideObserver {
                 ride.getStatus(),
                 ride.getUser() != null ? ride.getUser().getName() : "N/A",
                 ride.getDriver() != null ? ride.getDriver().getName() : "N/A",
-                ride.getPickupAddress(),
-                ride.getDestinationAddress(),
+                ride.getPickupLocation() != null ? ride.getPickupLocation().getAddress() : "N/A",
+                ride.getDestinationLocation() != null ? ride.getDestinationLocation().getAddress() : "N/A",
                 ride.getFare());
         
         // In a real application, this would be logged to a database or log file
