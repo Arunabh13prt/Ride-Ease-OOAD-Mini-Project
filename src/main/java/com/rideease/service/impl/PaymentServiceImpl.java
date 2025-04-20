@@ -5,6 +5,7 @@ import com.rideease.model.Payment;
 import com.rideease.model.Ride;
 import com.rideease.model.enums.PaymentMethod;
 import com.rideease.model.enums.PaymentStatus;
+import com.rideease.model.enums.RideStatus;
 import com.rideease.repository.PaymentRepository;
 import com.rideease.service.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,9 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment;
         if (existingPayment != null) {
             payment = existingPayment;
+            // Update payment details if they've changed
+            payment.setMethod(method);
+            payment.setStatus(PaymentStatus.PENDING);
         } else {
             payment = Payment.builder()
                     .ride(ride)
@@ -47,19 +51,34 @@ public class PaymentServiceImpl implements PaymentService {
                     .build();
         }
         
+        // Save the payment first in PENDING state
+        payment = paymentRepository.save(payment);
+        
         // Process payment (in a real system, this would integrate with payment gateway)
         try {
             // In a real implementation, we would use the cardDetails to process the payment
             // with a payment gateway API
+            
+            // Validate card details (simple validation for demo purposes)
+            if (cardDetails == null || cardDetails.trim().isEmpty()) {
+                throw new PaymentFailedException("Invalid card details");
+            }
             
             // Simulate successful payment processing
             payment.setCompleted(true);
             payment.setStatus(PaymentStatus.COMPLETED);
             payment.setPaymentTime(LocalDateTime.now());
             
+            // Update ride status if needed
+            if (ride.getStatus() == RideStatus.COMPLETED) {
+                // Payment is for a completed ride
+                // No need to update ride status
+            }
+            
             return paymentRepository.save(payment);
         } catch (Exception e) {
             payment.setStatus(PaymentStatus.FAILED);
+            payment.setCompleted(false);
             paymentRepository.save(payment);
             throw new PaymentFailedException("Payment processing failed: " + e.getMessage());
         }

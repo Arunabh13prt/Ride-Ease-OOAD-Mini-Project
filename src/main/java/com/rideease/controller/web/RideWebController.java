@@ -41,6 +41,8 @@ public class RideWebController {
     public String showBookRideForm(Model model) {
         List<User> users = userController.findAllUsers();
         model.addAttribute("users", users);
+        // Add all vehicle types to the model for the dropdown
+        model.addAttribute("vehicleTypes", com.rideease.model.enums.VehicleType.values());
         return "book-ride";
     }
 

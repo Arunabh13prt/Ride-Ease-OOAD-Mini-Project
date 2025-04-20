@@ -19,6 +19,7 @@ public interface RideService {
     List<Ride> findRidesByUser(User user);
     List<Ride> findRidesByDriver(Driver driver);
     List<Ride> findRidesByStatus(RideStatus status);
+    List<Ride> findRidesByDriverAndStatus(Driver driver, RideStatus status);
     List<Ride> findAllRides();
     double calculateFare(Ride ride);
     double calculateDistance(Location pickup, Location destination);

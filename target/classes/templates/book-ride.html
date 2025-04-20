@@ -38,6 +38,7 @@
     <div class="container">
         <div class="dashboard-card">
             <form th:action="@{/web/rides/book}" method="post">
+    <!-- The vehicleType field will be submitted along with the form -->
                 <!-- User selection -->
                 <div class="mb-3">
                     <label for="userId" class="form-label">Select User</label>
@@ -45,6 +46,26 @@
                         <option value="">-- Select User --</option>
                         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name + ' (' + user.email + ')'}"></option>
                     </select>
+                </div>
+
+                <!-- Vehicle Type selection (Factory Pattern) -->
+                <div class="mb-3">
+                    <label for="vehicleType" class="form-label fw-bold" style="font-size: 1.15rem;">Select Vehicle Type</label>
+                    <select class="form-select border-primary border-2" id="vehicleType" name="vehicleType" required onchange="updateVehicleSummary()">
+                        <option value="">-- Select Vehicle Type --</option>
+                        <option th:each="type : ${vehicleTypes}" th:value="${type}" th:text="${type}"></option>
+                    </select>
+                </div>
+                <!-- Vehicle Summary Card -->
+                <div id="vehicleSummaryCard" class="card mb-4 shadow-sm" style="display:none; max-width:400px;">
+                    <div class="card-body d-flex align-items-center">
+                        <div id="vehicleIcon" style="font-size:2.5rem; margin-right:20px;"></div>
+                        <div>
+                            <h5 id="vehicleTypeName" class="card-title mb-1"></h5>
+                            <div id="vehicleCapacity" class="mb-1 text-muted" style="font-size:0.95rem;"></div>
+                            <div id="vehicleDesc" class="card-text"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Pickup Location -->
@@ -99,22 +120,64 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript to pre-fill the form with default values -->
+    <!-- JavaScript for vehicle summary and pre-fill -->
     <script>
+        // Vehicle type details for summary card (icon, capacity, description)
+        const vehicleTypeDetails = {
+            'SEDAN': {
+                icon: '🚗',
+                capacity: 'Capacity: 4 passengers',
+                desc: 'A comfortable sedan, ideal for small groups and city rides.'
+            },
+            'SUV': {
+                icon: '🚙',
+                capacity: 'Capacity: 6 passengers',
+                desc: 'Spacious SUV, perfect for families or groups with extra luggage.'
+            },
+            'HATCHBACK': {
+                icon: '🚘',
+                capacity: 'Capacity: 4 passengers',
+                desc: 'Compact hatchback, best for budget rides and quick trips.'
+            },
+            'LUXURY': {
+                icon: '🏎️',
+                capacity: 'Capacity: 4 passengers',
+                desc: 'Premium luxury car for a stylish and comfortable experience.'
+            },
+            'AUTO_RICKSHAW': {
+                icon: '🛺',
+                capacity: 'Capacity: 3 passengers',
+                desc: 'Auto Rickshaw for short and affordable local commutes.'
+            }
+        };
+        function updateVehicleSummary() {
+            const select = document.getElementById('vehicleType');
+            const card = document.getElementById('vehicleSummaryCard');
+            const type = select.value;
+            if (vehicleTypeDetails[type]) {
+                card.style.display = 'block';
+                document.getElementById('vehicleIcon').textContent = vehicleTypeDetails[type].icon;
+                document.getElementById('vehicleTypeName').textContent = type.replace('_', ' ');
+                document.getElementById('vehicleCapacity').textContent = vehicleTypeDetails[type].capacity;
+                document.getElementById('vehicleDesc').textContent = vehicleTypeDetails[type].desc;
+            } else {
+                card.style.display = 'none';
+            }
+        }
         // Set default date time to current time + 30 minutes
         document.addEventListener('DOMContentLoaded', function() {
             const now = new Date();
             now.setMinutes(now.getMinutes() + 30);
-            
             // Format date to YYYY-MM-DDThh:mm
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
-            
             const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
             document.getElementById('pickupTime').value = formattedDateTime;
+            // If a vehicle type is pre-selected (e.g. after form error), show summary
+            updateVehicleSummary();
         });
     </script>
 </body>

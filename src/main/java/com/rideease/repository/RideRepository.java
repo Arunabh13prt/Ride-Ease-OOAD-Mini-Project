@@ -18,4 +18,5 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     List<Ride> findByStatus(RideStatus status);
     List<Ride> findByUserAndStatus(User user, RideStatus status);
     List<Ride> findByDriverAndStatus(Driver driver, RideStatus status);
+    List<Ride> findByDriverAndStatusOrderByCreatedAtDesc(Driver driver, RideStatus status);
 }

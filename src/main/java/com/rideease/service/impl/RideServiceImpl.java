@@ -7,6 +7,7 @@ import com.rideease.model.Location;
 import com.rideease.model.Ride;
 import com.rideease.model.User;
 import com.rideease.model.enums.RideStatus;
+import com.rideease.patterns.observer.RideNotificationManager;
 import com.rideease.repository.DriverRepository;
 import com.rideease.repository.RideRepository;
 import com.rideease.service.RideService;
@@ -146,6 +147,11 @@ public class RideServiceImpl implements RideService {
     @Override
     public List<Ride> findRidesByStatus(RideStatus status) {
         return rideRepository.findByStatus(status);
+    }
+    
+    @Override
+    public List<Ride> findRidesByDriverAndStatus(Driver driver, RideStatus status) {
+        return rideRepository.findByDriverAndStatusOrderByCreatedAtDesc(driver, status);
     }
 
     @Override

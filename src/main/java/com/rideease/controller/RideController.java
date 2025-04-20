@@ -96,6 +96,17 @@ public class RideController {
     public List<Ride> getRidesByStatus(RideStatus status) {
         return rideService.findRidesByStatus(status);
     }
+    
+    /**
+     * Get rides by driver ID and status
+     * @param driverId the driver ID
+     * @param status the ride status
+     * @return list of rides matching the driver and status
+     */
+    public List<Ride> getRidesByDriverIdAndStatus(Long driverId, RideStatus status) {
+        Driver driver = driverService.findDriverById(driverId);
+        return rideService.findRidesByDriverAndStatus(driver, status);
+    }
 
     public List<Ride> getAllRides() {
         return rideService.findAllRides();

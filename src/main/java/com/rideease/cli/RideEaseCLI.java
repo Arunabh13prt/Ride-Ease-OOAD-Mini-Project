@@ -971,52 +971,112 @@ public class RideEaseCLI {
     // Utility methods for input
     private String getStringInput(String prompt) {
         System.out.print(prompt + ": ");
-        return scanner.nextLine();
+        try {
+            return scanner.nextLine();
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available
+            System.out.println("Input not available. Using empty string.");
+            return "";
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using empty string.");
+            return "";
+        }
     }
 
     private int getIntInput(String prompt) {
         System.out.print(prompt + ": ");
         try {
-            int value = Integer.parseInt(scanner.nextLine());
-            return value;
+            String input = scanner.nextLine();
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter a valid number.");
+                return getIntInput(prompt);
+            }
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
             return getIntInput(prompt);
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available (e.g., when input stream is closed)
+            System.out.println("Input not available. Using default value 0.");
+            return 0;
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using default value 0.");
+            return 0;
         }
     }
 
     private long getLongInput(String prompt) {
         System.out.print(prompt + ": ");
         try {
-            long value = Long.parseLong(scanner.nextLine());
-            return value;
+            String input = scanner.nextLine();
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter a valid number.");
+                return getLongInput(prompt);
+            }
+            return Long.parseLong(input);
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
             return getLongInput(prompt);
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available
+            System.out.println("Input not available. Using default value 0.");
+            return 0L;
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using default value 0.");
+            return 0L;
         }
     }
 
     private double getDoubleInput(String prompt) {
         System.out.print(prompt + ": ");
         try {
-            double value = Double.parseDouble(scanner.nextLine());
-            return value;
+            String input = scanner.nextLine();
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter a valid number.");
+                return getDoubleInput(prompt);
+            }
+            return Double.parseDouble(input);
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
             return getDoubleInput(prompt);
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available
+            System.out.println("Input not available. Using default value 0.0.");
+            return 0.0;
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using default value 0.0.");
+            return 0.0;
         }
     }
 
     private boolean getBooleanInput(String prompt) {
         System.out.print(prompt + ": ");
-        String input = scanner.nextLine().toLowerCase();
-        if (input.equals("true") || input.equals("yes") || input.equals("y") || input.equals("1")) {
-            return true;
-        } else if (input.equals("false") || input.equals("no") || input.equals("n") || input.equals("0")) {
+        try {
+            String input = scanner.nextLine().toLowerCase();
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter true or false.");
+                return getBooleanInput(prompt);
+            }
+            if (input.equals("true") || input.equals("yes") || input.equals("y") || input.equals("1")) {
+                return true;
+            } else if (input.equals("false") || input.equals("no") || input.equals("n") || input.equals("0")) {
+                return false;
+            } else {
+                System.out.println("Please enter true or false.");
+                return getBooleanInput(prompt);
+            }
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available
+            System.out.println("Input not available. Using default value false.");
             return false;
-        } else {
-            System.out.println("Please enter true or false.");
-            return getBooleanInput(prompt);
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using default value false.");
+            return false;
         }
     }
 
@@ -1024,11 +1084,23 @@ public class RideEaseCLI {
         System.out.print(prompt + " (yyyy-MM-dd HH:mm): ");
         try {
             String input = scanner.nextLine();
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please enter a valid date and time.");
+                return getDateTimeInput(prompt);
+            }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             return LocalDateTime.parse(input, formatter);
         } catch (DateTimeParseException e) {
             System.out.println("Please enter a valid date and time (yyyy-MM-dd HH:mm).");
             return getDateTimeInput(prompt);
+        } catch (java.util.NoSuchElementException e) {
+            // Handle the case when there's no line available
+            System.out.println("Input not available. Using current time.");
+            return LocalDateTime.now();
+        } catch (IllegalStateException e) {
+            // Handle the case when scanner is closed
+            System.out.println("Scanner is closed. Using current time.");
+            return LocalDateTime.now();
         }
     }
 }

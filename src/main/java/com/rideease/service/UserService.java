@@ -16,4 +16,5 @@ public interface UserService {
     User getCurrentLoggedInUser();
     void setCurrentLoggedInUser(User user);
     void logoutCurrentUser();
+    void updateUserRating(Long userId);
 }

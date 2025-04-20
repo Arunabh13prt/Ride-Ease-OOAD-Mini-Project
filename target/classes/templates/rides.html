@@ -63,33 +63,23 @@
                         <tr>
                             <th>ID</th>
                             <th>User</th>
-                            <th>Driver</th>
                             <th>From</th>
                             <th>To</th>
                             <th>Pickup Time</th>
                             <th>Fare</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${rides.empty}">
-                            <td colspan="8" class="text-center">No rides recorded yet</td>
+                            <td colspan="6" class="text-center">No rides recorded yet</td>
                         </tr>
                         <tr th:each="ride : ${rides}">
                             <td th:text="${ride.id}">1</td>
                             <td th:text="${ride.user != null ? ride.user.name : 'Unknown'}">John Doe</td>
-                            <td th:text="${ride.driver != null ? ride.driver.name : 'Not Assigned'}">Jane Driver</td>
                             <td th:text="${ride.pickupLocation != null ? ride.pickupLocation.address : 'Unknown'}">123 Main St</td>
                             <td th:text="${ride.destinationLocation != null ? ride.destinationLocation.address : 'Unknown'}">456 Oak Ave</td>
                             <td th:text="${ride.pickupTime != null ? #temporals.format(ride.pickupTime, 'dd-MM-yyyy HH:mm') : 'Not Set'}">01-01-2025 12:00</td>
                             <td th:text="${'₹' + ride.fare}">₹150.00</td>
-                            <td>
-                                <span th:if="${ride.status.name() == 'REQUESTED'}" class="badge badge-requested">Requested</span>
-                                <span th:if="${ride.status.name() == 'ACCEPTED'}" class="badge badge-accepted">Accepted</span>
-                                <span th:if="${ride.status.name() == 'IN_PROGRESS'}" class="badge badge-in-progress">In Progress</span>
-                                <span th:if="${ride.status.name() == 'COMPLETED'}" class="badge badge-completed">Completed</span>
-                                <span th:if="${ride.status.name() == 'CANCELLED'}" class="badge badge-cancelled">Cancelled</span>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -59,12 +59,11 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Created At</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${users.empty}">
-                            <td colspan="6" class="text-center">No users registered yet</td>
+                            <td colspan="5" class="text-center">No users registered yet</td>
                         </tr>
                         <tr th:each="user : ${users}">
                             <td th:text="${user.id}">1</td>
@@ -72,10 +71,6 @@
                             <td th:text="${user.email}">john@example.com</td>
                             <td th:text="${user.phoneNumber}">+123456789</td>
                             <td th:text="${#temporals.format(user.createdAt, 'dd-MM-yyyy HH:mm')}">01-01-2025 12:00</td>
-                            <td>
-                                <a th:href="@{'/web/users/' + ${user.id}}" class="btn btn-sm btn-info">View</a>
-                                <a th:href="@{'/web/users/' + ${user.id} + '/edit'}" class="btn btn-sm btn-warning">Edit</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -110,4 +110,17 @@ public class UserServiceImpl implements UserService {
     public void logoutCurrentUser() {
         this.currentLoggedInUser = null;
     }
+    
+    @Override
+    public void updateUserRating(Long userId) {
+        // Get the user
+        User user = findUserById(userId);
+        
+        // In a real implementation, we would calculate the average rating from the database
+        // and update the user's rating field
+        // For now, this is just a placeholder implementation
+        
+        // The actual calculation is done in the RatingRepository with getAverageUserRating
+        // and used directly in the RatingController
+    }
 }

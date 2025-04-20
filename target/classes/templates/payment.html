@@ -62,7 +62,9 @@
             <h1 class="text-center">Make Payment</h1>
             <p class="text-center">Complete your ride payment</p>
             <div class="text-center mt-3">
-                <a th:href="@{'/web/rides/' + ${ride.id}}" class="btn btn-light">Back to Ride</a>
+                <!-- Show different back button based on context -->
+                <a th:if="${driver != null}" href="/drivers" class="btn btn-light">Back to Drivers</a>
+                <a th:if="${driver == null}" th:href="@{'/web/rides/' + ${ride.id}}" class="btn btn-light">Back to Ride</a>
                 <a href="/" class="btn btn-outline-light">Dashboard</a>
             </div>
         </div>
@@ -78,6 +80,7 @@
             <span th:text="${errorMessage}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+
         
         <div class="payment-card">
             <h3 class="text-center mb-4">Payment Details</h3>
@@ -117,7 +120,11 @@
                 </div>
             </div>
             
-            <form th:action="@{'/web/rides/' + ${ride.id} + '/pay'}" method="post">
+            <!-- Use driver-specific endpoint if driver is available in the model -->
+            <form th:if="${driver != null}" th:action="@{'/web/rides/driver/' + ${driver.id} + '/pay'}" method="post">
+                <input type="hidden" name="rideId" th:value="${ride.id}">
+            <!-- Use regular ride endpoint if no driver in the model -->
+            <form th:if="${driver == null}" th:action="@{'/web/rides/' + ${ride.id} + '/pay'}" method="post">
                 <div class="mb-3">
                     <label for="cardHolder" class="form-label">Card Holder Name</label>
                     <input type="text" class="form-control" id="cardHolder" name="cardHolder" placeholder="Name on card" required>
