@@ -22,12 +22,12 @@ public class PaymentController {
     private final PaymentService paymentService;
     private final RideService rideService;
 
-    public Payment processPayment(Long rideId, PaymentMethod method) {
+    public Payment processPayment(Long rideId, PaymentMethod method, String cardDetails) {
         // Get ride
         Ride ride = rideService.findRideById(rideId);
         
         // Process payment
-        return paymentService.processPayment(ride, method);
+        return paymentService.processPayment(ride, method, cardDetails);
     }
 
     public Payment getPaymentById(Long id) {

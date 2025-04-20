@@ -1,4 +1,5 @@
 /home/runner/workspace/src/main/java/com/rideease/model/Driver.java
+/home/runner/workspace/src/main/java/com/rideease/controller/web/DriverWebController.java
 /home/runner/workspace/src/main/java/com/rideease/model/Payment.java
 /home/runner/workspace/src/main/java/com/rideease/repository/UserRepository.java
 /home/runner/workspace/src/main/java/com/rideease/util/DistanceCalculator.java
@@ -9,13 +10,16 @@
 /home/runner/workspace/src/main/java/com/rideease/controller/RatingController.java
 /home/runner/workspace/src/main/java/com/rideease/cli/RideEaseCLI.java
 /home/runner/workspace/src/main/java/com/rideease/repository/RideRepository.java
+/home/runner/workspace/src/main/java/com/rideease/controller/web/PaymentWebController.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/singleton/DatabaseConnector.java
 /home/runner/workspace/src/main/java/com/rideease/service/impl/RatingServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/factory/VehicleFactory.java
 /home/runner/workspace/src/main/java/com/rideease/controller/PaymentController.java
 /home/runner/workspace/src/main/java/com/rideease/controller/web/HomeController.java
+/home/runner/workspace/src/main/java/com/rideease/controller/VehicleController.java
 /home/runner/workspace/src/main/java/com/rideease/controller/RideController.java
 /home/runner/workspace/src/main/java/com/rideease/repository/DriverRepository.java
+/home/runner/workspace/src/main/java/com/rideease/controller/web/UserWebController.java
 /home/runner/workspace/src/main/java/com/rideease/exception/UserNotFoundException.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/command/CommandInvoker.java
 /home/runner/workspace/src/main/java/com/rideease/model/User.java
@@ -26,6 +30,7 @@
 /home/runner/workspace/src/main/java/com/rideease/exception/RideNotFoundException.java
 /home/runner/workspace/src/main/java/com/rideease/patterns/builder/RideBuilder.java
 /home/runner/workspace/src/main/java/com/rideease/util/PricingStrategy.java
+/home/runner/workspace/src/main/java/com/rideease/model/enums/PaymentStatus.java
 /home/runner/workspace/src/main/java/com/rideease/repository/PaymentRepository.java
 /home/runner/workspace/src/main/java/com/rideease/service/VehicleService.java
 /home/runner/workspace/src/main/java/com/rideease/model/enums/RideStatus.java
@@ -40,6 +45,7 @@
 /home/runner/workspace/src/main/java/com/rideease/service/impl/DriverServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/exception/PaymentFailedException.java
 /home/runner/workspace/src/main/java/com/rideease/exception/DriverNotFoundException.java
+/home/runner/workspace/src/main/java/com/rideease/controller/web/RideWebController.java
 /home/runner/workspace/src/main/java/com/rideease/service/impl/UserServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/service/impl/PaymentServiceImpl.java
 /home/runner/workspace/src/main/java/com/rideease/service/UserService.java

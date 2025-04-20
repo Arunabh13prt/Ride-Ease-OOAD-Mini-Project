@@ -1,6 +1,7 @@
 package com.rideease.model;
 
 import com.rideease.model.enums.PaymentMethod;
+import com.rideease.model.enums.PaymentStatus;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -29,6 +30,9 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod method;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 
     private String transactionId;
 

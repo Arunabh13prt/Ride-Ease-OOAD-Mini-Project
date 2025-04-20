@@ -1,9 +1,10 @@
 package com.rideease.model.enums;
 
 public enum PaymentMethod {
-    CASH,
     CREDIT_CARD,
     DEBIT_CARD,
+    NET_BANKING,
     UPI,
-    WALLET
+    WALLET,
+    CASH
 }

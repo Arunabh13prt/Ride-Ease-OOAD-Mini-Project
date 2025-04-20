@@ -4,6 +4,7 @@ import com.rideease.exception.PaymentFailedException;
 import com.rideease.model.Payment;
 import com.rideease.model.Ride;
 import com.rideease.model.enums.PaymentMethod;
+import com.rideease.model.enums.PaymentStatus;
 import com.rideease.repository.PaymentRepository;
 import com.rideease.service.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
     @Override
-    public Payment processPayment(Ride ride, PaymentMethod method) {
+    public Payment processPayment(Ride ride, PaymentMethod method, String cardDetails) {
         // Check if payment already exists
         Payment existingPayment = paymentRepository.findByRide(ride).orElse(null);
         
@@ -40,6 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
                     .ride(ride)
                     .amount(ride.getFare())
                     .method(method)
+                    .status(PaymentStatus.PENDING)
                     .completed(false)
                     .transactionId(generateTransactionId())
                     .build();
@@ -47,12 +49,18 @@ public class PaymentServiceImpl implements PaymentService {
         
         // Process payment (in a real system, this would integrate with payment gateway)
         try {
-            // Simulate payment processing
+            // In a real implementation, we would use the cardDetails to process the payment
+            // with a payment gateway API
+            
+            // Simulate successful payment processing
             payment.setCompleted(true);
+            payment.setStatus(PaymentStatus.COMPLETED);
             payment.setPaymentTime(LocalDateTime.now());
             
             return paymentRepository.save(payment);
         } catch (Exception e) {
+            payment.setStatus(PaymentStatus.FAILED);
+            paymentRepository.save(payment);
             throw new PaymentFailedException("Payment processing failed: " + e.getMessage());
         }
     }

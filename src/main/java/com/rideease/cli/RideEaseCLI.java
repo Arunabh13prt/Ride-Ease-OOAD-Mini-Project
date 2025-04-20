@@ -657,9 +657,23 @@ public class RideEaseCLI {
         int methodChoice = getIntInput("Enter payment method number");
         PaymentMethod paymentMethod = PaymentMethod.values()[methodChoice];
         
+        // For card-based payment methods, collect card details
+        String cardDetails = "CASH";
+        if (paymentMethod == PaymentMethod.CREDIT_CARD || paymentMethod == PaymentMethod.DEBIT_CARD) {
+            System.out.println("\nEnter card details:");
+            String cardNumber = getStringInput("Card Number");
+            String expiryDate = getStringInput("Expiry Date (MM/YY)");
+            String cvv = getStringInput("CVV");
+            String cardHolder = getStringInput("Card Holder Name");
+            
+            // Mask card number for security
+            String maskedCardNumber = "xxxx-xxxx-xxxx-" + cardNumber.substring(cardNumber.length()-4);
+            cardDetails = maskedCardNumber;
+        }
+        
         // Process payment
         try {
-            paymentController.processPayment(rideId, paymentMethod);
+            paymentController.processPayment(rideId, paymentMethod, cardDetails);
             System.out.println("Payment processed successfully.");
         } catch (Exception e) {
             System.out.println("Payment failed: " + e.getMessage());
@@ -685,7 +699,7 @@ public class RideEaseCLI {
                                        " - Ride ID: " + payment.getRide().getId() + 
                                        " - Amount: $" + payment.getAmount() + 
                                        " - Method: " + payment.getMethod() + 
-                                       " - Status: " + (payment.isCompleted() ? "Completed" : "Pending"));
+                                       " - Status: " + (payment.getStatus() != null ? payment.getStatus() : (payment.isCompleted() ? "COMPLETED" : "PENDING")));
                 }
             }
         } catch (Exception e) {
@@ -705,7 +719,7 @@ public class RideEaseCLI {
             System.out.println("Amount: $" + payment.getAmount());
             System.out.println("Method: " + payment.getMethod());
             System.out.println("Transaction ID: " + payment.getTransactionId());
-            System.out.println("Status: " + (payment.isCompleted() ? "Completed" : "Pending"));
+            System.out.println("Status: " + (payment.getStatus() != null ? payment.getStatus() : (payment.isCompleted() ? "COMPLETED" : "PENDING")));
             System.out.println("Payment Time: " + payment.getPaymentTime());
         } catch (Exception e) {
             System.out.println("Error retrieving payment: " + e.getMessage());
@@ -928,7 +942,7 @@ public class RideEaseCLI {
                                    " - User: " + payment.getRide().getUser().getName() + 
                                    " - Amount: $" + payment.getAmount() + 
                                    " - Method: " + payment.getMethod() + 
-                                   " - Status: " + (payment.isCompleted() ? "Completed" : "Pending"));
+                                   " - Status: " + (payment.getStatus() != null ? payment.getStatus() : (payment.isCompleted() ? "COMPLETED" : "PENDING")));
             }
         }
     }
